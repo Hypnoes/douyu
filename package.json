@@ -1,0 +1,27 @@
+{
+  "name": "douyu",
+  "version": "1.0.0",
+  "description": "douyu danmu client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hypnoes/douyu.git"
+  },
+  "keywords": [
+    "douyu",
+    "danmu"
+  ],
+  "author": "Hypnoes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hypnoes/douyu/issues"
+  },
+  "homepage": "https://github.com/hypnoes/douyu#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "douyu-danmu": "^2.0.7"
+  }
+}
