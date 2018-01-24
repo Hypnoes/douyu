@@ -81,7 +81,8 @@ def col(msg):
         
     if "col" not in msg:
         msg["col"] = "0"
-    txt = "[%s] :: %s > %s" % (t_col(msg["level"]), c.cyan(msg["nn"], style="underline"), color[msg["col"]](msg["txt"]))
+    txt = "[%s] :: %s > %s" % (t_col(msg["level"]), 
+            c.cyan(msg["nn"], style="underline"), color[msg["col"]](msg["txt"]))
     
     return n + b + txt
 
