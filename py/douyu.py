@@ -4,11 +4,11 @@
 import time,os,sys
 import re
 
-import color as c
+import colors as c
 from danmu import DanMuClient
 
 color = {
-        "0" : c.black,
+        "0" : c.white,
         "1" : c.blue,
         "2" : c.green,
         "3" : c.magenta,
@@ -31,28 +31,28 @@ def le_col(level, label=""):
     if int(level) == 0:
         return "         "
     if 10 > int(level) > 0:
-        return color["4"](label + "0" + level, reverse=True)
+        return color["4"](label + "0" + level)
     if 20 > int(level) >= 10:
-        return color["5"](label + level, reverse=True)
+        return color["5"](label + level)
     if int(level) >= 20:
-        return color["6"](label + level, reverse=True)
+        return color["6"](label + level)
 
 def t_col(level):
     l = int(level)
     if 10 > l:
-        return c.yellow("0" + level, reverse=True) 
+        return c.yellow("0" + level) 
     if 30 > l >= 10:
-        return c.green(level, reverse=True)
+        return c.green(level)
     if 40 > l >= 30:
-        return c.cyan(level, reverse=True)
+        return c.cyan(level)
     if 50 > l >= 40:
-        return c.blue(level, reverse=True)
+        return c.blue(level)
     if 80 > l >= 50:
-        return c.magenta(level, reverse=True)
+        return c.magenta(level)
     if 100> l > 80:
-        return c.red(level, reverse=True)
+        return c.red(level)
     if l > 100:
-        return c.yellow(level, bold=True, reverse=True)
+        return c.yellow(level)
 
 def col(msg):
     b = "[]"
@@ -77,11 +77,11 @@ def col(msg):
     
     n = "[游客]"
     if "nl" in msg:
-        n = "[%s]" % (color[str(7 - int(msg["nl"]))](title[msg["nl"]], bold=True))
+        n = "[%s]" % (color[str(7 - int(msg["nl"]))](title[msg["nl"]]))
         
     if "col" not in msg:
         msg["col"] = "0"
-    txt = "[%s] :: %s > %s" % (t_col(msg["level"]), msg["nn"], color[msg["col"]](msg["txt"]))
+    txt = "[%s] :: %s > %s" % (t_col(msg["level"]), c.cyan(msg["nn"], style="underline"), color[msg["col"]](msg["txt"]))
     
     return n + b + txt
 
