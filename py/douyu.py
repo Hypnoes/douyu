@@ -3,6 +3,7 @@
 
 import time,os,sys
 import re
+from functools import partial
 
 import colors as c
 from danmu import DanMuClient
@@ -18,43 +19,47 @@ color = {
         }
 
 title = {
-        "7" : "游侠",
-        "1" : "骑士",
-        "2" : "子爵",
-        "3" : "伯爵",
-        "4" : "公爵",
-        "5" : "国王",
-        "6" : "皇帝"
+        "7" : c.color("游侠", fg='white', style='bold'),
+        "1" : c.color("骑士", fg='blue', style='bold'),
+        "2" : c.color("子爵", fg='green', style='bold'),
+        "3" : c.color("伯爵", fg='pink', style='bold'),
+        "4" : c.color("公爵", fg='yellow', style='bold'),
+        "5" : c.color("国王", fg='red', style='bold'),
+        "6" : c.color("皇帝", fg='gold', style='bold')
         }
 
 def le_col(level, label="") -> str:
-    if int(level) == 0:
+    ''' label level '''
+    lv = int(level)
+    if lv == 0:
         return "         "
-    if 10 > int(level) > 0:
-        return color["4"](label + "0" + level)
-    if 20 > int(level) >= 10:
-        return color["5"](label + level)
-    if int(level) >= 20:
-        return color["6"](label + level)
+    if 10 > lv > 0:
+        return c.yellow(label + "0" + level, style='negative')
+    if 20 > lv >= 10:
+        return c.cyan(label + level, style='negative')
+    if lv >= 20:
+        return c.red(label + level, style='negative')
 
 def t_col(level) -> str:
+    ''' user level '''
     l = int(level)
     if 10 > l:
-        return c.yellow("0" + level) 
+        return c.yellow("0" + level, style='negative') 
     if 30 > l >= 10:
-        return c.green(level)
+        return c.green(level, style='negative')
     if 40 > l >= 30:
-        return c.cyan(level)
+        return c.cyan(level, style='negative')
     if 50 > l >= 40:
-        return c.blue(level)
+        return c.blue(level, style='negative')
     if 80 > l >= 50:
-        return c.magenta(level)
+        return c.magenta(level, style='negative')
     if 100> l > 80:
-        return c.red(level)
+        return c.red(level, style='negative')
     if l > 100:
-        return c.yellow(level)
+        return c.yellow(level, style='negative')
 
 def col(msg) -> str:
+    ''' assembly danmu '''
     b = "[]"
     if "bnn" in msg and "bl" in msg:
         bnn = msg["bnn"]
@@ -77,8 +82,7 @@ def col(msg) -> str:
     
     n = "[游客]"
     if "nl" in msg:
-        n = "[%s]" % (color[str(7 - int(msg["nl"]))](title[msg["nl"]]))
-        
+        n = "[%s]" % (title[msg["nl"]])
     if "col" not in msg:
         msg["col"] = "0"
     txt = "[%s] :: %s > %s" % (t_col(msg["level"]), 

@@ -12,6 +12,7 @@ for i in range(256):
         print(c.color('Color #{0}'.format(i).ljust(10), fg=i), end='\n')
 print()
 
+# c.color(text*, fg, bg, style)
 print(c.color('orange on gray', 'orange', 'gray'))
 print(c.color('nice color', 'white', '#8a2be2'))
 
