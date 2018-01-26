@@ -27,7 +27,7 @@ title = {
         "6" : "皇帝"
         }
 
-def le_col(level, label=""):
+def le_col(level, label="") -> str:
     if int(level) == 0:
         return "         "
     if 10 > int(level) > 0:
@@ -37,7 +37,7 @@ def le_col(level, label=""):
     if int(level) >= 20:
         return color["6"](label + level)
 
-def t_col(level):
+def t_col(level) -> str:
     l = int(level)
     if 10 > l:
         return c.yellow("0" + level) 
@@ -54,7 +54,7 @@ def t_col(level):
     if l > 100:
         return c.yellow(level)
 
-def col(msg):
+def col(msg) -> str:
     b = "[]"
     if "bnn" in msg and "bl" in msg:
         bnn = msg["bnn"]
@@ -98,7 +98,7 @@ except Exception as e:
     exit(1)
 
 @dmc.danmu
-def danmu_fn(msg):
+def danmu_fn(msg) -> None:
     try:
         print(col(msg), end="\n")
     except Exception as e:
@@ -107,7 +107,7 @@ def danmu_fn(msg):
         pass
     
 @dmc.default
-def default_fn(msg):
+def default_fn(msg) -> None:
     print("", end='\r')
 
 dmc.start(blockThread=True)
