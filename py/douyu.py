@@ -85,6 +85,12 @@ def col(msg) -> str:
         n = "[%s]" % (title[msg["nl"]])
     if "col" not in msg:
         msg["col"] = "0"
+    
+    width, height = os.get_terminal_size()
+    len_msg = len(msg['nn'] + msg['txt']) + 28
+    if width < len_msg:
+        msg['txt'] = msg['txt'][:width - len(msg['nn']) - 28]
+
     txt = "[%s] :: %s > %s" % (t_col(msg["level"]), 
             c.cyan(msg["nn"], style="underline"), color[msg["col"]](msg["txt"]))
     
